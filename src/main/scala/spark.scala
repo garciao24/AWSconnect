@@ -5,22 +5,23 @@ import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
 
 import scala.Console.{GREEN, RESET}
+import scala.io.{BufferedSource, Source}
 
 class spark (){
 
 
   var accessKey = " "
   var secretKey = " "
-//  val bufferedSource: BufferedSource = Source.fromFile("C:\\Resources\\rootkey.csv")
-//  var count = 0
-//  for (line <- bufferedSource.getLines) {
-//    val Array(val1, value) = line.split("=").map(_.trim)
-//    count match {
-//      case 0 => accessKey = value
-//      case 1 => secretKey = value
-//    }
-//    count = count + 1
-//  }
+  val bufferedSource: BufferedSource = Source.fromFile("C:\\Resources\\rootkeyP3.csv")
+  var count = 0
+  for (line <- bufferedSource.getLines) {
+    val Array(val1, value) = line.split("=").map(_.trim)
+    count match {
+      case 0 => accessKey = value
+      case 1 => secretKey = value
+    }
+    count = count + 1
+  }
 
   System.setProperty("hadoop.home.dir", "C:\\hadoop3")
   val spark: SparkSession = SparkSession.builder()
